@@ -1,1 +1,401 @@
-
+[{
+    "name": "Dota 2",
+    "appid": 570
+},
+{
+    "name": "Counter-Strike: Global Offensive",
+    "appid": 730
+},
+{
+    "name": "Apex Legends",
+    "appid": 1172470
+},
+{
+    "name": "New World",
+    "appid": 1063730
+},
+{
+    "name": "PUBG: BATTLEGROUNDS",
+    "appid": 578080
+},
+{
+    "name": "Team Fortress 2",
+    "appid": 440
+},
+{
+    "name": "Grand Theft Auto V",
+    "appid": 271590
+},
+{
+    "name": "Lost Ark",
+    "appid": 1599340
+},
+{
+    "name": "Left 4 Dead 2",
+    "appid": 550
+},
+{
+    "name": "Unturned",
+    "appid": 304930
+},
+{
+    "name": "Rust",
+    "appid": 252490
+},
+{
+    "name": "Warframe",
+    "appid": 230410
+},
+{
+    "name": "Terraria",
+    "appid": 105600
+},
+{
+    "name": "Garry's Mod",
+    "appid": 4000
+},
+{
+    "name": "ELDEN RING",
+    "appid": 1245620
+},
+{
+    "name": "War Thunder",
+    "appid": 236390
+},
+{
+    "name": "Brawlhalla",
+    "appid": 291550
+},
+{
+    "name": "Tom Clancy's Rainbow Six Siege",
+    "appid": 359550
+},
+{
+    "name": "Call of Duty: Modern Warfare II",
+    "appid": 1938090
+},
+{
+    "name": "Wallpaper Engine",
+    "appid": 431960
+},
+{
+    "name": "Destiny 2",
+    "appid": 1085660
+},
+{
+    "name": "Half-Life 2: Lost Coast",
+    "appid": 340
+},
+{
+    "name": "ARK: Survival Evolved",
+    "appid": 346110
+},
+{
+    "name": "Path of Exile",
+    "appid": 238960
+},
+{
+    "name": "Grand Theft Auto IV: Complete Edition",
+    "appid": 901583
+},
+{
+    "name": "Among Us",
+    "appid": 945360
+},
+{
+    "name": "PAYDAY 2",
+    "appid": 218620
+},
+{
+    "name": "Valheim",
+    "appid": 892970
+},
+{
+    "name": "Cyberpunk 2077",
+    "appid": 1091500
+},
+{
+    "name": "The Forest",
+    "appid": 242760
+},
+{
+    "name": "Baldur's Gate 3",
+    "appid": 1086940
+},
+{
+    "name": "Fall Guys: Ultimate Knockout",
+    "appid": 1097150
+},
+{
+    "name": "Don't Starve Together",
+    "appid": 322330
+},
+{
+    "name": "Stardew Valley",
+    "appid": 413150
+},
+{
+    "name": "Paladins",
+    "appid": 444090
+},
+{
+    "name": "The Witcher 3: Wild Hunt",
+    "appid": 292030
+},
+{
+    "name": "Borderlands 2",
+    "appid": 49520
+},
+{
+    "name": "Dead by Daylight",
+    "appid": 381210
+},
+{
+    "name": "Counter-Strike",
+    "appid": 10
+},
+{
+    "name": "Serena",
+    "appid": 272060
+},
+{
+    "name": "Euro Truck Simulator 2",
+    "appid": 227300
+},
+{
+    "name": "Heroes & Generals",
+    "appid": 227940
+},
+{
+    "name": "Rocket League",
+    "appid": 252950
+},
+{
+    "name": "\u9b3c\u8c37\u516b\u8352 Tale of Immortal",
+    "appid": 1468810
+},
+{
+    "name": "World of Warships",
+    "appid": 552990
+},
+{
+    "name": "Portal 2",
+    "appid": 620
+},
+{
+    "name": "Halo Infinite",
+    "appid": 1240440
+},
+{
+    "name": "Phasmophobia",
+    "appid": 739630
+},
+{
+    "name": "Hogwarts Legacy",
+    "appid": 990080
+},
+{
+    "name": "Half-Life 2: Deathmatch",
+    "appid": 320
+},
+{
+    "name": "NARAKA: BLADEPOINT",
+    "appid": 1203220
+},
+{
+    "name": "SMITE",
+    "appid": 386360
+},
+{
+    "name": "VRChat",
+    "appid": 438100
+},
+{
+    "name": "Black Squad",
+    "appid": 550650
+},
+{
+    "name": "World of Tanks Blitz",
+    "appid": 444200
+},
+{
+    "name": "Robocraft",
+    "appid": 301520
+},
+{
+    "name": "Raft",
+    "appid": 648800
+},
+{
+    "name": "Monster Hunter: World",
+    "appid": 582010
+},
+{
+    "name": "Trove",
+    "appid": 304050
+},
+{
+    "name": "Human Fall Flat",
+    "appid": 477160
+},
+{
+    "name": "Ring of Elysium",
+    "appid": 755790
+},
+{
+    "name": "Battlefield 2042",
+    "appid": 1517290
+},
+{
+    "name": "Street Warriors Online",
+    "appid": 417910
+},
+{
+    "name": "Half-Life",
+    "appid": 70
+},
+{
+    "name": "Portal",
+    "appid": 400
+},
+{
+    "name": "Dying Light",
+    "appid": 239140
+},
+{
+    "name": "7 Days to Die",
+    "appid": 251570
+},
+{
+    "name": "Mount & Blade II: Bannerlord",
+    "appid": 261550
+},
+{
+    "name": "Hollow Knight",
+    "appid": 367520
+},
+{
+    "name": "Red Dead Redemption 2",
+    "appid": 1174180
+},
+{
+    "name": "Sid Meier's Civilization V",
+    "appid": 8930
+},
+{
+    "name": "Project Zomboid",
+    "appid": 108600
+},
+{
+    "name": "The Sims 4",
+    "appid": 1222670
+},
+{
+    "name": "Sekiro: Shadows Die Twice - GOTY Edition",
+    "appid": 814380
+},
+{
+    "name": "PlanetSide 2",
+    "appid": 218230
+},
+{
+    "name": "Z1 Battle Royale",
+    "appid": 433850
+},
+{
+    "name": "The Elder Scrolls V: Skyrim",
+    "appid": 72850
+},
+{
+    "name": "Cities: Skylines",
+    "appid": 255710
+},
+{
+    "name": "Ricochet",
+    "appid": 60
+},
+{
+    "name": "Life is Strange 2",
+    "appid": 532210
+},
+{
+    "name": "The Binding of Isaac: Rebirth",
+    "appid": 250900
+},
+{
+    "name": "The Tiny Bang Story",
+    "appid": 96000
+},
+{
+    "name": "Counter-Strike: Condition Zero",
+    "appid": 80
+},
+{
+    "name": "Fallout 4",
+    "appid": 377160
+},
+{
+    "name": "NBA 2K20",
+    "appid": 1089350
+},
+{
+    "name": "Castle Crashers",
+    "appid": 204360
+},
+{
+    "name": "Minion Masters",
+    "appid": 489520
+},
+{
+    "name": "Day of Defeat: Source",
+    "appid": 300
+},
+{
+    "name": "Arma 3",
+    "appid": 107410
+},
+{
+    "name": "Dota Underlords",
+    "appid": 1046930
+},
+{
+    "name": "Sid Meier\u2019s Civilization VI",
+    "appid": 289070
+},
+{
+    "name": "Guacamelee! Super Turbo Championship Edition",
+    "appid": 275390
+},
+{
+    "name": "Tomb Raider",
+    "appid": 203160
+},
+{
+    "name": "Kathy Rain",
+    "appid": 370910
+},
+{
+    "name": "Deceit",
+    "appid": 466240
+},
+{
+    "name": "Half-Life 2",
+    "appid": 220
+},
+{
+    "name": "Half-Life: Blue Shift",
+    "appid": 130
+},
+{
+    "name": "DayZ",
+    "appid": 221100
+},
+{
+    "name": "A Story About My Uncle",
+    "appid": 278360
+},
+{
+    "name": "Battlefield V",
+    "appid": 1238810
+}
+]
