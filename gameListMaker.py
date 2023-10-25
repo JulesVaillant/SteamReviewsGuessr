@@ -8,7 +8,7 @@ response_dict = response.json()
 
 with open(filename, "w", encoding="utf-8") as f:
     index_dict = 0
-    f.write("[")
+    f.write("{")
     for key in response_dict.keys():
         gameName = response_dict[key]["name"]
         gameID = response_dict[key]["appid"]
@@ -16,9 +16,9 @@ with open(filename, "w", encoding="utf-8") as f:
             "name": gameName,
             "appid":gameID
         }
-        f.write(json.dumps(game_dict, indent=4))
+        f.write(f"\"{str(index_dict)}\":"+ json.dumps(game_dict, indent=4))
         if(index_dict != len(response_dict.keys())-1):
             f.write(",")
         f.write("\n")
         index_dict+=1
-    f.write("]")
+    f.write("}")
