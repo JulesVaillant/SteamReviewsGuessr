@@ -2,11 +2,13 @@ const fs = require('fs')
 const obj = JSON.parse(fs.readFileSync('gameList.json', 'utf8'));
 const request = require('request')
 
+let reviewLanguage = "english" //"french"
+
 let key = Math.floor(Math.random()*(Object.keys(obj).length-1)).toString()   //key = random [0; gameList.length]
 
-let url = "https://store.steampowered.com/appreviews/" + obj[key]['appid'] + "?json=1"
-//let url = "https://store.steampowered.com/appreviews/1046930?json=1"  //ERROR 
+let url = "https://store.steampowered.com/appreviews/" + obj[key]['appid'] + "?json=1&language=" + reviewLanguage + "&num_per_page=100&purchase_type=all&day_range=365"
 let options = {json: true};
+
 
 request(url, options, (error, res, body) => {
     if (error) {
@@ -25,5 +27,7 @@ request(url, options, (error, res, body) => {
         else{
             console.log("ERROR, NO REVIEWS FOUND FOR " + obj[key]['name'])
         }
+
+        console.log("nb reviews:", res.body['query_summary']['num_reviews'])
     };
 });
