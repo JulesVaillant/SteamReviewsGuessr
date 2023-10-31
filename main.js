@@ -30,7 +30,7 @@ class SteamGame {
       }
     }
     catch (error) {
-      throw new Error(`Error: ${error.message}`);
+      throw new Error(`Error`);
     }
   }
 
@@ -47,9 +47,14 @@ class SteamGame {
    */
   getRandomReviews(number) {
     const reviewSet = new Set();
+    if (this.steamReviews.length < number) {
+      number = this.steamReviews.length
+    }
     while (reviewSet.size < number) {
-      const randomNumber = Math.floor(Math.random() * this.steamReviews.length - 1);
-      reviewSet.add(this.steamReviews[randomNumber]['review']);
+      const randomNumber = Math.floor(Math.random() * (this.steamReviews.length - 1));
+      if (this.steamReviews[randomNumber].hasOwnProperty('review')) {
+        reviewSet.add(this.steamReviews[randomNumber]['review']);
+      }
     }
     return Array.from(reviewSet);
   }
@@ -101,28 +106,30 @@ function reducingScore() {
   }
 }
 
+const numberReviews = 3;
+const numberGamesSuggestions = 4;
 let totalScore = 0;
 let score;
 let intervalId;
-test = new SteamGame("french");
+test = new SteamGame("english");
 
 async function main() {
   score = 100;
   await test.downloadReviews();
   var reviewIndex = 0;
-  test.getRandomReviews(3).forEach(element => {
+  test.getRandomReviews(numberReviews).forEach(element => {
     reviewIndex += 1;
     console.log("REVIEW " + reviewIndex + ") " + element + "\n");
   });
 
   console.log("\n------------------------------\n")
   var gameSuggestionIndex = 0;
-  gamesSuggestions = test.getGamesSuggestions(4);
+  gamesSuggestions = test.getGamesSuggestions(numberGamesSuggestions);
   gamesSuggestions.forEach(element => {
     gameSuggestionIndex += 1;
     console.log("GAME " + gameSuggestionIndex + ") " + element);
   })
-  
+
   intervalId = setInterval(reducingScore, 1000); // starts the score coutdown
 
   readline.question('Which of these? ', num => {
