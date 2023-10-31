@@ -90,10 +90,24 @@ class SteamGame {
 }
 
 
-test = new SteamGame("english");
-console.log(test.getName());
+/**
+ * @description Function that reduce the score by 1 every second. This value is defined when the setInterval is called. The score won't go below 10
+ */
+function reducingScore() {
+  if (score > 10) {
+    score -= 1;
+  } else {
+    clearInterval(intervalId); // Arrêter l'intervalle si maVariable <= 10
+  }
+}
+
+let totalScore = 0;
+let score;
+let intervalId;
+test = new SteamGame("french");
 
 async function main() {
+  score = 100;
   await test.downloadReviews();
   var reviewIndex = 0;
   test.getRandomReviews(3).forEach(element => {
@@ -108,11 +122,22 @@ async function main() {
     gameSuggestionIndex += 1;
     console.log("GAME " + gameSuggestionIndex + ") " + element);
   })
+  
+  intervalId = setInterval(reducingScore, 1000); // starts the score coutdown
+
   readline.question('Which of these? ', num => {
-    if (test.checkGame(gamesSuggestions[num - 1])) console.log("Well done! 👍");
-    else console.log("Too bad 👎");
+    if (test.checkGame(gamesSuggestions[num - 1])) {
+      console.log("Well done! 👍");
+      totalScore += score;
+    }
+    else {
+      console.log(`Too bad 👎, the game was : ${test.getName()}`);
+      totalScore += 0;
+    }
+    console.log("Your current score is: " + totalScore)
+    clearInterval(intervalId);
     readline.close();
   });
 }
-main();
 
+main()
