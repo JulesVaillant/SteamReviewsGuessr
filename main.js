@@ -12,7 +12,6 @@ class SteamGame{
     this.name = games[this.key]['name']
     this.url = "https://store.steampowered.com/appreviews/" + games[this.key]['appid'] + "?json=1&language=" + reviewLanguage + "&num_per_page=100&purchase_type=all&day_range=365"
     this.steamReviews = []
-    //this.DownloadReviews()
   }
 
   /**
@@ -56,14 +55,12 @@ class SteamGame{
    * @returns {String[]} Returns on array of video games title
    */
   getGamesSuggestions(number){
-    var e = 1;
     var goodGame = this.name
     const gamesSet = new Set();
     gamesSet.add(goodGame);
     while(gamesSet.size < number){
       const randomNumber = Math.floor(Math.random()*(Object.keys(games).length-1)).toString()
       gamesSet.add(games[randomNumber]['name']);
-      e+=1
     }
     var gamesArray = Array.from(gamesSet);
     for (let i = gamesArray.length - 1; i > 0; i--) {
