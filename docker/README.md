@@ -8,7 +8,9 @@ Once this image has been built, you can run a docker container using this **dock
 sudo docker run -d \
     --name steam-review-game \
     -p 8080:8080 \
+    --restart unless-stopped \
     steam-review-image
+    
 ```
 or by using this **docker-compose.yaml** config:
 ```
@@ -19,4 +21,5 @@ services:
     image: steam-review-image
     ports:
       - '8080:8080'
+    restart: unless-stopped
 ```
