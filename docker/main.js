@@ -5,6 +5,7 @@ const schedule = require('node-schedule');
 const { exec } = require('child_process');
 const bodyParser = require('body-parser');
 const express = require('express')
+var favicon = require('serve-favicon');
 const app = express()
 
 class SteamGame {
@@ -116,6 +117,8 @@ let intervalId;
 const port = 8000;
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
+//TODO: change this line when docker folder will no longer exist
+app.use(favicon(__dirname + '/../static/favicon.ico'));
 
 var buttonsData = [];
 var reviewsData = [];
@@ -158,67 +161,19 @@ app.get('/', (req, res) => {
 app.post('/submit', (req, res) => {
   const buttonAction = req.body.buttonAction;
   console.log(`Le bouton avec l'action ${buttonAction} a été appuyé.`);
-  //res.send(`Le bouton avec l'action ${buttonAction} a été appuyé.`);
 
   if (test.checkGame(gamesSuggestions[buttonAction])) {
-    //res.write("Well done! 👍");
     console.log("GG")
     totalScore += score;
   }
   else {
-    //res.write(`Too bad 👎, the game was : ${test.getName()}`);
     console.log(`the game was : ${test.getName()}`)
     totalScore += 0;
   }
-  //res.write("Your current score is: " + totalScore)
   clearInterval(intervalId);
-  res.render('results', {boolResult : test.checkGame(gamesSuggestions[buttonAction]), goodGame: test.getName()});
+  res.render('results', {boolResult : test.checkGame(gamesSuggestions[buttonAction]), goodGame: test.getName(), score: totalScore});
 });
 
 app.listen(port, () => {
   console.log(`Serveur en cours d'exécution sur http://localhost:${port}`);
 });
-
-
-/*http.createServer(async (req, res) => {
-  test = new SteamGame("english");
-  res.write(`score:${totalScore}`); //write a response to the client
-  score = 100;
-  await test.downloadReviews();
-  var reviewIndex = 0;
-  test.getRandomReviews(numberReviews).forEach(element => {
-    reviewIndex += 1;
-    res.write("REVIEW " + reviewIndex + ") " + element + "\n");
-  });
-
-  res.write("\n------------------------------\n")
-  var gameSuggestionIndex = 0;
-  gamesSuggestions = test.getGamesSuggestions(numberGamesSuggestions);
-  gamesSuggestions.forEach(element => {
-    gameSuggestionIndex += 1;
-    res.write("GAME " + gameSuggestionIndex + ") " + element);
-  })
-
-  intervalId = setInterval(reducingScore, 1000); // starts the score coutdown
-
-  readline.question('Which of these? ', num => {
-    if (test.checkGame(gamesSuggestions[num - 1])) {
-      res.write("Well done! 👍");
-      totalScore += score;
-    }
-    else {
-      res.write(`Too bad 👎, the game was : ${test.getName()}`);
-      totalScore += 0;
-    }
-    res.write("Your current score is: " + totalScore)
-    clearInterval(intervalId);
-    readline.close();
-  });
-  
-  res.end(); //end the response
-}).listen(8080); //the server object listens on port 8080 
-*/
-
-/*const job = schedule.scheduleJob('* * * * *', function(){
-  exec("python3 gameListMaker.py");
-});*/
