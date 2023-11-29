@@ -16,6 +16,7 @@ class SteamGame {
   constructor(reviewLanguage) {
     this.key = Math.floor(Math.random() * (Object.keys(games).length - 1)).toString();   //key = random [0; gameList.length]
     this.name = games[this.key]['name'];
+    this.steamID = games[this.key]['appid'];
     this.url = "https://store.steampowered.com/appreviews/" + games[this.key]['appid'] + "?json=1&language=" + reviewLanguage + "&num_per_page=100&purchase_type=all&day_range=365";
     this.steamReviews = [];
   }
@@ -41,6 +42,13 @@ class SteamGame {
    */
   getName() {
     return this.name;
+  }
+
+  /**
+   * @returns {int} returns Steam ID of the game 
+   */
+  getSteamAdress(){
+    return "https://store.steampowered.com/app/"+this.steamID;
   }
 
   /**
@@ -171,7 +179,7 @@ app.post('/submit', (req, res) => {
     totalScore += 0;
   }
   clearInterval(intervalId);
-  res.render('results', {boolResult : test.checkGame(gamesSuggestions[buttonAction]), goodGame: test.getName(), score: totalScore});
+  res.render('results', {boolResult : test.checkGame(gamesSuggestions[buttonAction]), goodGame: test.getName(), score: totalScore, goToSteam: test.getSteamAdress()});
 });
 
 app.listen(port, () => {
