@@ -6,6 +6,7 @@ const { exec } = require('child_process');
 const bodyParser = require('body-parser');
 const express = require('express')
 var favicon = require('serve-favicon');
+const session = require('express-session');
 const app = express()
 
 class SteamGame {
@@ -116,6 +117,27 @@ function reducingScore() {
   }
 }
 
+/**
+ * 
+ * @param {String} text Text to break lines if they are > maxLineLength
+ * @param {int} maxLineLength  Max size before break line
+ * @returns {String} returns string formatted with line breaks if they are > maxLineLength
+ */
+function formatText(text, maxLineLength) {
+  const lines = text.split('\n');
+  const formattedLines = [];
+
+  lines.forEach(line => {
+    while (line.length > maxLineLength) {
+      formattedLines.push(line.substring(0, maxLineLength));
+      line = line.substring(maxLineLength);
+    }
+    formattedLines.push(line);
+  });
+
+  return formattedLines.join('\n');
+}
+
 const numberReviews = 3;
 const numberGamesSuggestions = 4;
 let totalScore = 0;
@@ -127,30 +149,38 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 //TODO: change this line when docker folder will no longer exist
 app.use(favicon(__dirname + '/../static/favicon.ico'));
+app.use(session({
+  secret: 'votre_secret_key',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // Notez que secure devrait être true en production avec HTTPS
+}))
 
 var buttonsData = [];
 var reviewsData = [];
-var test;
+//var req.session.jeu;
 
 app.get('/', (req, res) => {
+  
   reviewsData = [];
   buttonsData = [];
-  test = new SteamGame("english");
+  req.session.jeu = new SteamGame("english");
   score = 100;
   console.log("before results");
   (async () => {
     try {
-      const resultat = await test.downloadReviews();
+      const resultat = await req.session.jeu.downloadReviews();
       console.log("got results");
       var reviewIndex = 0;
-      test.getRandomReviews(numberReviews).forEach(element => {
+      req.session.jeu.getRandomReviews(numberReviews).forEach(element => {
+        element = formatText(element, 200);
         reviewsData.push({label: reviewIndex, value: element});
         reviewIndex += 1;
         console.log("REVIEW " + reviewIndex + ") " + element + "\n");
       });
 
         var gameSuggestionIndex = 0;
-        gamesSuggestions = test.getGamesSuggestions(numberGamesSuggestions);
+        gamesSuggestions = req.session.jeu.getGamesSuggestions(numberGamesSuggestions);
         gamesSuggestions.forEach(element => {
           buttonsData.push({label: element, gameIndex: gameSuggestionIndex});
           gameSuggestionIndex += 1;
@@ -169,17 +199,17 @@ app.get('/', (req, res) => {
 app.post('/submit', (req, res) => {
   const buttonAction = req.body.buttonAction;
   console.log(`Le bouton avec l'action ${buttonAction} a été appuyé.`);
-
-  if (test.checkGame(gamesSuggestions[buttonAction])) {
+  
+  if (req.session.jeu.checkGame(gamesSuggestions[buttonAction])) {
     console.log("GG")
     totalScore += score;
   }
   else {
-    console.log(`the game was : ${test.getName()}`)
+    console.log(`the game was : ${req.session.jeu.getName()}`)
     totalScore += 0;
   }
   clearInterval(intervalId);
-  res.render('results', {boolResult : test.checkGame(gamesSuggestions[buttonAction]), goodGame: test.getName(), score: totalScore, goToSteam: test.getSteamAdress()});
+  res.render('results', {boolResult : req.session.jeu.checkGame(gamesSuggestions[buttonAction]), goodGame: req.session.jeu.getName(), score: totalScore, goToSteam: req.session.jeu.getSteamAdress()});
 });
 
 app.listen(port, () => {
