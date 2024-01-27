@@ -8,6 +8,10 @@ WORKDIR /app
 COPY . /app
 RUN npm install axios
 RUN npm install node-schedule
+RUN npm install body-parser
+RUN npm install express
+RUN npm install serve-favicon
+RUN npm install express-session
 RUN pip install requests
 EXPOSE 8080/tcp
 EXPOSE 8080/udp
