@@ -1,0 +1,8 @@
+version: '3'
+services:
+  steam-review-guessr:
+    container_name: steam-review-game
+    image: steam-review-image
+    ports:
+      - '8080:8080'
+    restart: unless-stopped
