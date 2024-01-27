@@ -1,14 +1,13 @@
 const fs = require('fs')
 const axios = require('axios');
-const readline = require('readline').createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
 const games = JSON.parse(fs.readFileSync('gameList.json', 'utf8'));
-var http = require('http');
 const schedule = require('node-schedule');
 const { exec } = require('child_process');
-
+const bodyParser = require('body-parser');
+const express = require('express')
+var favicon = require('serve-favicon');
+const session = require('express-session');
+const app = express()
 
 class SteamGame {
   /**
@@ -18,6 +17,7 @@ class SteamGame {
   constructor(reviewLanguage) {
     this.key = Math.floor(Math.random() * (Object.keys(games).length - 1)).toString();   //key = random [0; gameList.length]
     this.name = games[this.key]['name'];
+    this.steamID = games[this.key]['appid'];
     this.url = "https://store.steampowered.com/appreviews/" + games[this.key]['appid'] + "?json=1&language=" + reviewLanguage + "&num_per_page=100&purchase_type=all&day_range=365";
     this.steamReviews = [];
   }
@@ -43,6 +43,13 @@ class SteamGame {
    */
   getName() {
     return this.name;
+  }
+
+  /**
+   * @returns {int} returns Steam ID of the game 
+   */
+  getSteamAdress(){
+    return "https://store.steampowered.com/app/"+this.steamID;
   }
 
   /**
@@ -110,53 +117,101 @@ function reducingScore() {
   }
 }
 
+/**
+ * 
+ * @param {String} text Text to break lines if they are > maxLineLength
+ * @param {int} maxLineLength  Max size before break line
+ * @returns {String} returns string formatted with line breaks if they are > maxLineLength
+ */
+function formatText(text, maxLineLength) {
+  const lines = text.split('\n');
+  const formattedLines = [];
+
+  lines.forEach(line => {
+    while (line.length > maxLineLength) {
+      formattedLines.push(line.substring(0, maxLineLength));
+      line = line.substring(maxLineLength);
+    }
+    formattedLines.push(line);
+  });
+
+  return formattedLines.join('\n');
+}
+
 const numberReviews = 3;
 const numberGamesSuggestions = 4;
 let totalScore = 0;
 let score;
 let intervalId;
-//test = new SteamGame("english");
 
+const port = 8000;
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: true }));
+//TODO: change this line when docker folder will no longer exist
+app.use(favicon(__dirname + '/../static/favicon.ico'));
+app.use(session({
+  secret: 'votre_secret_key',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // Notez que secure devrait être true en production avec HTTPS
+}))
 
+var buttonsData = [];
+var reviewsData = [];
+//var req.session.jeu;
 
-http.createServer(async (req, res) => {
-  test = new SteamGame("english");
-  res.write(`score:${totalScore}`); //write a response to the client
-  score = 100;
-  await test.downloadReviews();
-  var reviewIndex = 0;
-  test.getRandomReviews(numberReviews).forEach(element => {
-    reviewIndex += 1;
-    res.write("REVIEW " + reviewIndex + ") " + element + "\n");
-  });
-
-  res.write("\n------------------------------\n")
-  var gameSuggestionIndex = 0;
-  gamesSuggestions = test.getGamesSuggestions(numberGamesSuggestions);
-  gamesSuggestions.forEach(element => {
-    gameSuggestionIndex += 1;
-    res.write("GAME " + gameSuggestionIndex + ") " + element);
-  })
-
-  intervalId = setInterval(reducingScore, 1000); // starts the score coutdown
-
-  readline.question('Which of these? ', num => {
-    if (test.checkGame(gamesSuggestions[num - 1])) {
-      res.write("Well done! 👍");
-      totalScore += score;
-    }
-    else {
-      res.write(`Too bad 👎, the game was : ${test.getName()}`);
-      totalScore += 0;
-    }
-    res.write("Your current score is: " + totalScore)
-    clearInterval(intervalId);
-    readline.close();
-  });
+app.get('/', (req, res) => {
   
-  res.end(); //end the response
-}).listen(8080); //the server object listens on port 8080 
+  reviewsData = [];
+  buttonsData = [];
+  req.session.jeu = new SteamGame("english");
+  score = 100;
+  console.log("before results");
+  (async () => {
+    try {
+      const resultat = await req.session.jeu.downloadReviews();
+      console.log("got results");
+      var reviewIndex = 0;
+      req.session.jeu.getRandomReviews(numberReviews).forEach(element => {
+        element = formatText(element, 200);
+        reviewsData.push({label: reviewIndex, value: element});
+        reviewIndex += 1;
+        console.log("REVIEW " + reviewIndex + ") " + element + "\n");
+      });
 
-const job = schedule.scheduleJob('* * * * *', function(){
-  exec("python3 gameListMaker.py");
+        var gameSuggestionIndex = 0;
+        gamesSuggestions = req.session.jeu.getGamesSuggestions(numberGamesSuggestions);
+        gamesSuggestions.forEach(element => {
+          buttonsData.push({label: element, gameIndex: gameSuggestionIndex});
+          gameSuggestionIndex += 1;
+        });
+
+        intervalId = setInterval(reducingScore, 1000); // starts the score coutdown
+
+        res.render('form', { buttons: buttonsData , reviewsEjs: reviewsData});
+      }
+    catch (erreur) {
+      console.error(erreur);
+    }
+  })();
+});
+
+app.post('/submit', (req, res) => {
+  const buttonAction = req.body.buttonAction;
+  console.log(`Le bouton avec l'action ${buttonAction} a été appuyé.`);
+  
+  if (req.session.jeu.checkGame(gamesSuggestions[buttonAction])) {
+    console.log("GG")
+    totalScore += score;
+  }
+  else {
+    console.log(`the game was : ${req.session.jeu.getName()}`)
+    totalScore += 0;
+  }
+  clearInterval(intervalId);
+  res.render('results', {boolResult : req.session.jeu.checkGame(gamesSuggestions[buttonAction]), goodGame: req.session.jeu.getName(), score: totalScore, goToSteam: req.session.jeu.getSteamAdress()});
+});
+
+app.listen(port, () => {
+  console.log(`Serveur en cours d'exécution sur http://localhost:${port}`);
 });

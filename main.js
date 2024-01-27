@@ -132,7 +132,7 @@ async function main() {
 
   intervalId = setInterval(reducingScore, 1000); // starts the score coutdown
 
-  readline.question('Which of these? ', num => {
+  /*readline.question('Which of these? ', num => {
     if (test.checkGame(gamesSuggestions[num - 1])) {
       console.log("Well done! 👍");
       totalScore += score;
@@ -144,7 +144,7 @@ async function main() {
     console.log("Your current score is: " + totalScore)
     clearInterval(intervalId);
     readline.close();
-  });
+  });*/
 }
 
 main()

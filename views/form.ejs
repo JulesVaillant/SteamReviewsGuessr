@@ -1,0 +1,24 @@
+<!-- views/buttons.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews</title>
+</head>
+<body>
+    <h1>Reviews</h1>
+    <% for (let i = 0; i < reviewsEjs.length; i++){ %>
+      <br><p>REVIEW <%=i+1%>)<pre><%= reviewsEjs[i].value %></pre></p>
+      <% } %>
+    <h1>Games suggestions</h1>
+    
+    <% for (let i = 0; i < buttons.length; i++) { %>
+      <form action="/submit" method="post">
+        <button type="submit" name="buttonAction" value="<%= buttons[i].gameIndex %>">
+          <%= buttons[i].label %>
+        </button>
+      </form>
+    <% } %>      
+</body>
+</html>

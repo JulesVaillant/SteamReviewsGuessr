@@ -1,0 +1,29 @@
+<!-- views/buttons.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+</head>
+<body>
+    <h1>Results</h1>
+
+    <% if(boolResult){ %>
+        <h1>GG !!!!!</h1>
+    <% } else { %>
+        <h1> TOO BAD WANKER</h1>
+        <p> Game was: <%=goodGame %></p>
+    <% } %>
+
+    <p><%=score %></p>
+
+    <form action="/">Next question
+        <input type="submit" value="submit">
+    </form>
+
+    <form action="<%=goToSteam %>">
+        <input type="submit" value="check game on Steam">
+    </form>
+</body>
+</html>
