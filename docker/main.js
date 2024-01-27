@@ -148,7 +148,8 @@ const port = 8000;
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 //TODO: change this line when docker folder will no longer exist
-app.use(favicon(__dirname + '/../static/favicon.ico'));
+//app.use(favicon(__dirname + '/../static/favicon.ico'));
+app.use(favicon("../static/favicon.ico"))
 app.use(session({
   secret: 'votre_secret_key',
   resave: false,
