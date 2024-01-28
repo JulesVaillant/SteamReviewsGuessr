@@ -6,6 +6,8 @@ RUN python3 -m ensurepip
 RUN pip3 install --no-cache --upgrade pip setuptools
 WORKDIR /app
 COPY . /app
+COPY static /app/static
+COPY view /app/views
 RUN npm install axios
 RUN npm install node-schedule
 RUN npm install body-parser
