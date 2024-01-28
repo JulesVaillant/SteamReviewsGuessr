@@ -7,15 +7,16 @@ RUN pip3 install --no-cache --upgrade pip setuptools
 WORKDIR /app
 COPY . /app
 COPY static /app/static
-COPY view /app/views
+COPY views /app/views
 RUN npm install axios
 RUN npm install node-schedule
 RUN npm install body-parser
 RUN npm install express
+RUN npm install ejs
 RUN npm install serve-favicon
 RUN npm install express-session
 RUN pip install requests
-EXPOSE 8080/tcp
-EXPOSE 8080/udp
+EXPOSE 8000/tcp
+EXPOSE 8000/udp
 ENTRYPOINT [ "node" ]
 CMD [ "main.js" ]

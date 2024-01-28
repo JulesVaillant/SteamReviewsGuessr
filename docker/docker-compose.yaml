@@ -4,5 +4,5 @@ services:
     container_name: steam-review-game
     image: steam-review-image
     ports:
-      - '8080:8080'
+      - '8000:8000'
     restart: unless-stopped
