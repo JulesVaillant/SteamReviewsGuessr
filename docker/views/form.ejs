@@ -5,20 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reviews</title>
+    <link rel="stylesheet" type="text/css" href="/css/styleGame.css">
 </head>
 <body>
+
     <h1>Reviews</h1>
+    <div class= "review">
     <% for (let i = 0; i < reviewsEjs.length; i++){ %>
       <br><p>REVIEW <%=i+1%>)<pre><%= reviewsEjs[i].value %></pre></p>
       <% } %>
-    <h1>Games suggestions</h1>
+
+    </div>
     
+    <h1>Games suggestions</h1>
+    <div class="suggestions">
     <% for (let i = 0; i < buttons.length; i++) { %>
       <form action="/submit" method="post">
         <button type="submit" name="buttonAction" value="<%= buttons[i].gameIndex %>">
           <%= buttons[i].label %>
         </button>
-      </form>
-    <% } %>      
+      </form>      
+    <% } %>
+  </div>      
 </body>
 </html>

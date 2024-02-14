@@ -6,6 +6,7 @@ var favicon = require('serve-favicon');
 const session = require('express-session');
 const SteamGame = require('./SteamGame');
 const app = express()
+app.use(express.static(__dirname + '/public'));
 
 //-----------------------functions
 
