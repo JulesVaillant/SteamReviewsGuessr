@@ -1,31 +1,83 @@
 <!-- views/buttons.ejs -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reviews</title>
-    <link rel="stylesheet" type="text/css" href="/css/styleGame.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviews</title>
+  <link rel="stylesheet" type="text/css" href="/css/styleGame.css">
 </head>
+
 <body>
 
-    <h1>Reviews</h1>
-    <div class= "review">
-    <% for (let i = 0; i < reviewsEjs.length; i++){ %>
-      <br><p>REVIEW <%=i+1%>)<pre><%= reviewsEjs[i].value %></pre></p>
-      <% } %>
+  <h1>Reviews</h1>
 
-    </div>
-    
-    <h1>Games suggestions</h1>
-    <div class="suggestions">
-    <% for (let i = 0; i < buttons.length; i++) { %>
+  <div class="review">
+    <% for (let i=0; i < reviewsEjs.length; i++){ %>
+      <br>
+      <h2>REVIEW <%=i+1%>)</h2>
+      <p>
+      <div class="dark-theme-container">
+        <div class="content">
+          <pre class="reviewText"><%= reviewsEjs[i].value %></pre>
+          </p>
+        </div>
+      </div>
+      <% } %>
+  </div>
+
+
+  <h1>Games suggestions</h1>
+  <div class="suggestions">
+    <% for (let i=0; i < buttons.length; i++) { %>
       <form action="/submit" method="post">
         <button type="submit" name="buttonAction" value="<%= buttons[i].gameIndex %>">
           <%= buttons[i].label %>
         </button>
-      </form>      
-    <% } %>
-  </div>      
+      </form>
+      <% } %>
+  </div>
+
+  <script>
+    function modifierTexte() {
+      var elements = document.getElementsByClassName("reviewText");
+      for (var i = 0; i < elements.length; i++) {
+        console.log(elements[i].innerHTML);
+        var nouveauTexte = elements[i].innerHTML.replace(/\[h1\](.*?)\[\/h1\]/g, function (match, p1) {
+          return '<span class="h1-style">' + p1 + '</span>';
+        }).replace(/\[h2\](.*?)\[\/h2\]/g, function (match, p1) {
+          return '<span class="h2-style">' + p1 + '</span>';
+        }).replace(/\[b\](.*?)\[\/b\]/g, function (match, p1) {
+          return '<span class="b-style">' + p1 + '</span>';
+        }).replace(/\[i\](.*?)\[\/i\]/g, function (match, p1) {
+          return '<span class="i-style">' + p1 + '</span>';
+        }).replace(/\[strike\](.*?)\[\/strike\]/g, function (match, p1) {
+          return '<span class="strike-style">' + p1 + '</span>';
+        }).replace(/\[u\](.*?)\[\/u\]/g, function (match, p1) {
+          return '<span class="u-style">' + p1 + '</span>';
+        }).replace(/\[list\]/g, '').replace(/\[\/list\]/g, '').replace(/\[\*\]/g, '•'); 
+        
+        elements[i].innerHTML = nouveauTexte;
+      }
+      makeTable();
+    }
+
+    function makeTable(){
+      var elements = document.getElementsByClassName("reviewText");
+      for (var i = 0; i < elements.length; i++) {
+        console.log(elements[i].innerHTML);
+        var nouveauTexte = elements[i].innerHTML.replace(/\[table\]/g, '<table>').replace(/\[\/table\]/g, '</table>');
+        nouveauTexte = nouveauTexte.replace(/\[tr\]/g, '<tr>').replace(/\[\/tr\]/g, '</tr>');
+        nouveauTexte = nouveauTexte.replace(/\[th\]/g, '<th>').replace(/\[\/th\]/g, '</th>');
+        nouveauTexte = nouveauTexte.replace(/\[td\]/g, '<td>').replace(/\[\/td\]/g, '</td>');
+        nouveauTexte = nouveauTexte.replace(/\[\*\]/g, '</td><td>');
+        
+        elements[i].innerHTML = nouveauTexte;
+      }
+    }
+
+    window.onload = modifierTexte;
+  </script>
 </body>
 </html>

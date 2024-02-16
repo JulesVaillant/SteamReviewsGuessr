@@ -1,6 +1,6 @@
 body {
     font-family: 'Courier New', monospace;
-    background-color:  #3f4344;
+    background-color: #3f4344;
     color: #fff;
     margin: 0;
     padding: 0;
@@ -14,34 +14,34 @@ body {
 
 h1 {
     color: #4fc3f7;
-    background: linear-gradient(180deg, #3f4344,#3b5e92,#3f4344 );
+    background: linear-gradient(180deg, #3f4344, #3b5e92, #3f4344);
     padding: 20px;
     text-align: center;
 }
 
 h2 {
-    color: #4fc3f7; 
+    color: #4fc3f7;
 }
 
 p {
-    font-size: 18px; 
+    font-size: 18px;
     line-height: 1.8;
 }
 
 button {
-    background-color: #4fc3f7; 
+    background-color: #4fc3f7;
     color: #fff;
-    padding: 12px 24px; 
-    font-size: 18px; 
+    padding: 12px 24px;
+    font-size: 18px;
     cursor: pointer;
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
     transition: background-color 0.3s ease;
     border-radius: 10px;
     border-color: #3b5e92;
 }
 
 button:hover {
-    background-color: #3a9cc9; 
+    background-color: #3a9cc9;
 }
 
 form {
@@ -52,12 +52,81 @@ pre {
     white-space: pre-wrap;
 }
 
-.suggestions{
+.suggestions {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.review{
-text-align: center;
+.review {
+    text-align: center;
 }
+
+.dark-theme-container {
+    text-align: left;
+    border-radius: 10px;
+    border-color: #9f9f9f;
+    background-color: #333;
+    /* Couleur de fond sombre */
+    color: #ffffff;
+    /* Couleur du texte en blanc */
+    width: 60%;
+    /* Largeur du conteneur */
+    margin: 0 auto;
+    /* Centrage horizontal */
+    padding: 20px;
+    /* Espacement interne */
+    box-sizing: border-box;
+    /* Inclure le padding dans la largeur */
+}
+
+/* Contenu non centré à l'intérieur du conteneur */
+.content {
+    max-width: 600px;
+    /* Largeur maximale du contenu */
+    margin: 0 auto;
+    /* Centrage horizontal du contenu */
+}
+
+.h1-style {
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: purple;
+}
+
+.h2-style {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: blueviolet;
+}
+
+.b-style {
+    font-weight: bold;
+}
+
+.u-style {
+    text-decoration: underline;
+}
+
+.i-style {
+    font-style: italic;
+}
+
+.strike-style {
+    text-decoration: line-through;
+}
+
+  /* Ajout de styles pour la table */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px; /* Ajout d'une marge en bas de la table */
+  }
+  /* Ajout de styles pour les cellules */
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px; /* Ajout de remplissage aux cellules */
+    text-align: left;
+  }
