@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'accueil</title>
+    <link rel="stylesheet" href="css/styleHome.css">
+</head>
+
+<body>
+    <header>
+        <div class="menu-toggle" onclick="toggleMenu()"><img src="/images/menu.png" alt="Accueil"></div>
+        <nav id="menu">
+            <ul>
+                <li><a href="/">Accueil</a></li>
+                <li><a href="about">À propos</a></li>
+                <li><a href="https://github.com/Khopylium/SteamReviewsGuessr">Code</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <footer>
+        <p class="copyright">VAILLANT Jules & SIMONE Gregory</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            if (menu.style.display === "block") {
+                menu.style.opacity = 0;
+                setTimeout(() => { menu.style.display = "none"; }, 300);
+            } else {
+                menu.style.display = "block";
+                setTimeout(() => { menu.style.opacity = 1; }, 10);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

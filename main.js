@@ -64,8 +64,18 @@ app.use(session({
 }))
 
 //-------------------------------PAGE ACCUEIL
+app.get('/', (req, res) =>{
+  res.render('home');
+});
 
-app.get('/', (req, res) => {
+//-------------------------------PAGE A PROPOS
+app.get('/about', (req, res) =>{
+  res.render('about');
+});
+
+//-------------------------------PAGE QUESTION
+
+app.get('/reviews', (req, res) => {
   reviewsData = [];
   buttonsData = [];
   req.session.jeu =  new SteamGame("english");
@@ -102,7 +112,7 @@ app.get('/', (req, res) => {
 
 //----------------------------------PAGE REPONSE
 
-app.post('/submit', (req, res) => {
+app.post('/answer', (req, res) => {
   const buttonAction = req.body.buttonAction;
   console.log(`Le bouton avec l'action ${buttonAction} a été appuyé.`);
   if (SteamGame.checkGame(req.session.jeu.name, gamesSuggestions[buttonAction])) {

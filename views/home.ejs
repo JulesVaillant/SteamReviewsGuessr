@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'accueil</title>
+    <link rel="stylesheet" href="css/styleHome.css">
+</head>
+
+<body>
+    <header>
+        <div class="menu-toggle" onclick="toggleMenu()"><img src="/images/menu.png" alt="Accueil"></div>
+        <nav id="menu">
+            <ul>
+                <li><a href="/">Accueil</a></li>
+                <li><a href="about">À propos</a></li>
+                <li><a href="https://github.com/Khopylium/SteamReviewsGuessr">Code</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1 id="typing-text"></h1>
+        <p>Devinez de quel jeu Steam on est en train de parler.</p>
+        <a href="reviews" class="btn">Jouer</a>
+    </div>
+
+    <footer>
+        <p class="copyright">VAILLANT Jules & SIMONE Gregory</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const text = "SteamReviewGuessr";
+            const typingTextElement = document.getElementById('typing-text');
+            let index = 0;
+
+            function typeWriter() {
+                if (index < text.length) {
+                    typingTextElement.innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+
+            typeWriter();
+        });
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            if (menu.style.display === "block") {
+                menu.style.opacity = 0; 
+                setTimeout(() => { menu.style.display = "none"; }, 300); 
+            } else {
+                menu.style.display = "block";
+                setTimeout(() => { menu.style.opacity = 1; }, 10); 
+            }
+        }
+    </script>
+</body>
+
+</html>
