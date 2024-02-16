@@ -77,6 +77,14 @@
       }
     }
 
+    function makeLink(){
+      var elements = document.getElementsByClassName("reviewText");
+      for(var i =0; i<elements.length; i++){
+        var nouveauTexte = elements[i].innerHTML.replace(/\[url=(.*?)\](.*?)\[\/url\]/g, '<a href="$1" target="_blank">$2</a>');
+        elements[i].innerHTML = nouveauTexte;
+      }
+    }
+
     window.onload = modifierTexte;
   </script>
 </body>

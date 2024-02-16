@@ -9,7 +9,6 @@ const app = express()
 app.use(express.static(__dirname + '/public'));
 
 //-----------------------functions
-
 /**
  * @description Function that reduce the score by 1 every second. This value is defined when the setInterval is called. The score won't go below 10
  */
@@ -17,28 +16,8 @@ function reducingScore() {
   if (score > 10) {
     score -= 1;
   } else {
-    clearInterval(intervalId); // Arrêter l'intervalle si maVariable <= 10
+    clearInterval(intervalId); // Arrêter l'intervalle si score <= 10
   }
-}
-
-/**
- * @param {String} text Text to break lines if they are > maxLineLength
- * @param {int} maxLineLength  Max size before break line
- * @returns {String} returns string formatted with line breaks if they are > maxLineLength
- */
-function formatText(text, maxLineLength) {
-  const lines = text.split('\n');
-  const formattedLines = [];
-
-  lines.forEach(line => {
-    while (line.length > maxLineLength) {
-      formattedLines.push(line.substring(0, maxLineLength));
-      line = line.substring(maxLineLength);
-    }
-    formattedLines.push(line);
-  });
-
-  return formattedLines.join('\n');
 }
 
 //---------------------------variables
@@ -50,6 +29,8 @@ let score;
 let intervalId;
 var buttonsData = [];
 var reviewsData = [];
+let questionIndex=0;
+let questionNumber=10;
 
 //-------------------------------Express config
 
@@ -65,6 +46,8 @@ app.use(session({
 
 //-------------------------------PAGE ACCUEIL
 app.get('/', (req, res) =>{
+  questionIndex=0;
+  questionNumber=10;
   res.render('home');
 });
 
@@ -76,21 +59,21 @@ app.get('/about', (req, res) =>{
 //-------------------------------PAGE QUESTION
 
 app.get('/reviews', (req, res) => {
+  questionIndex+=1;
   reviewsData = [];
   buttonsData = [];
   req.session.jeu =  new SteamGame("english");
   score = 100;
-  console.log("before results");
+  //console.log("before results");
   (async () => {
     try {
       const resultat = await req.session.jeu.downloadReviews();
-      console.log("got results");
+      //console.log("got results");
       var reviewIndex = 0;
       req.session.jeu.getRandomReviews(numberReviews).forEach(element => {
-        element = formatText(element, 200);
         reviewsData.push({label: reviewIndex, value: element});
         reviewIndex += 1;
-        console.log("REVIEW " + reviewIndex + ") " + element + "\n");
+        //console.log("REVIEW " + reviewIndex + ") " + element);
       });
 
         var gameSuggestionIndex = 0;
@@ -100,7 +83,7 @@ app.get('/reviews', (req, res) => {
           gameSuggestionIndex += 1;
         });
 
-        intervalId = setInterval(reducingScore, 1000); // starts the score coutdown
+        intervalId = setInterval(reducingScore, 1000); 
 
         res.render('form', { buttons: buttonsData , reviewsEjs: reviewsData});
       }
@@ -114,17 +97,22 @@ app.get('/reviews', (req, res) => {
 
 app.post('/answer', (req, res) => {
   const buttonAction = req.body.buttonAction;
-  console.log(`Le bouton avec l'action ${buttonAction} a été appuyé.`);
+  //console.log(`Le bouton avec l'action ${buttonAction} a été appuyé.`);
   if (SteamGame.checkGame(req.session.jeu.name, gamesSuggestions[buttonAction])) {
-    console.log("GG")
+    //console.log("GG")
     totalScore += score;
   }
   else {
-    console.log(`the game was : ${req.session.jeu.name}`)
+    //console.log(`the game was : ${req.session.jeu.name}`)
     totalScore += 0;
   }
   clearInterval(intervalId);
-  res.render('results', {boolResult : SteamGame.checkGame(req.session.jeu.name, gamesSuggestions[buttonAction]), goodGame: req.session.jeu.name, score: totalScore, goToSteam: SteamGame.getSteamAdress(req.session.jeu.steamID)});
+  if(questionIndex<questionNumber){
+    res.render('results', {boolResult : SteamGame.checkGame(req.session.jeu.name, gamesSuggestions[buttonAction]), goodGame: req.session.jeu.name, score: totalScore, goToSteam: SteamGame.getSteamAdress(req.session.jeu.steamID), question_index: questionIndex , question_number: questionNumber});
+  }
+  else{
+    res.render('end',{boolResult : SteamGame.checkGame(req.session.jeu.name, gamesSuggestions[buttonAction]), goodGame: req.session.jeu.name, score: totalScore, goToSteam: SteamGame.getSteamAdress(req.session.jeu.steamID)}); 
+  }
 });
 
 //----------------------------------Lance serveur

@@ -11,15 +11,10 @@
 
 <body>
     <div class="band">
-        <h1>Results</h1>
+        <h1>The end!</h1>
     </div>
 
     <div class="result">
-
-        <div class="question_number">
-            <h2>Question</h2>
-            <%=question_index %> / <%=question_number %>
-        </div>
 
         <div class="resultGame ">
             <% if(boolResult){ %>
@@ -30,20 +25,19 @@
                     </p>
                     <% } %>
 
-                        <p>Current score: <%=score %>
-                        </p>
+                    <h3>Your final score is <%=score %>!</h3>
         </div>
 
         <div class="buttonsResult">
-            <form action="/reviews">
+            <form action="/">
                 <br>
                 <br>
                 <br>
-                <input type="submit" value="Next question">
+                <input type="submit" value="Go back to main!">
             </form>
             <br>
-            <form action="<%=goToSteam %>">
 
+            <form action="<%=goToSteam %>">
                 <input type="submit" value="Check the game on Steam">
             </form>
         </div>
