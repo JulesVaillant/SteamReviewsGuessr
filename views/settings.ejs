@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'accueil</title>
+    <link rel="stylesheet" href="css/styleHome.css">
+</head>
+
+<body>
+    <form action="/" method="post">
+    <label for="review_language">Langue des reviews:</label>
+    <input type="radio" id="french" name="review_language" value="french"><label for="french">Français</label><br>
+    <input type="radio" id="english" name="review_language" value="english" checked><label
+        for="english">English</label><br>
+    <label for="questions">Nombre de questions (10-100):</label>
+    <input type="number" id="questions" name="questions_number" min="10" max="100" value="10" />
+    <button type="submit">Save</button>
+</form>
+</body>

@@ -100,3 +100,30 @@ footer {
     bottom: 0; 
     width: 100%;
 }
+
+/* Styles de base pour le bouton */
+button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Styles lorsque le curseur survole le bouton */
+button[type="submit"]:hover {
+    background-color: #45a049; /* Couleur de fond au survol */
+}
+
+/* Styles lorsque le bouton est actif (clic) */
+button[type="submit"]:active {
+    background-color: #3e8e41; /* Couleur de fond lors du clic */
+}
+
+/* Style optionnel pour le centrage du bouton */
+.form-button-container {
+    text-align: center;
+}

@@ -24,13 +24,8 @@ function reducingScore() {
 
 const numberReviews = 3;
 const numberGamesSuggestions = 4;
-let totalScore = 0;
 let score;
 let intervalId;
-var buttonsData = [];
-var reviewsData = [];
-let questionIndex=0;
-let questionNumber=10;
 
 //-------------------------------Express config
 
@@ -46,8 +41,18 @@ app.use(session({
 
 //-------------------------------PAGE ACCUEIL
 app.get('/', (req, res) =>{
-  questionIndex=0;
-  questionNumber=10;
+  req.session.totalScore=0;
+  req.session.questionIndex=0;
+  req.session.language="english";
+  req.session.questionNumber=10;
+  res.render('home');
+});
+
+app.post('/', (req, res)=>{
+  req.session.totalScore=0;
+  req.session.questionIndex=0;
+  req.session.language=req.body.review_language;
+  req.session.questionNumber=req.body.questions_number;
   res.render('home');
 });
 
@@ -56,13 +61,18 @@ app.get('/about', (req, res) =>{
   res.render('about');
 });
 
+//-------------------------------PAGE PARAMETRES
+app.get('/settings', (req, res)=>{
+  res.render('settings');
+})
+
 //-------------------------------PAGE QUESTION
 
-app.get('/reviews', (req, res) => {
-  questionIndex+=1;
-  reviewsData = [];
-  buttonsData = [];
-  req.session.jeu =  new SteamGame("english");
+app.post('/reviews', (req, res) => {
+  req.session.questionIndex+=1;
+  var reviewsData = [];
+  var buttonsData = [];
+  req.session.jeu =  new SteamGame(req.session.language);
   score = 100;
   //console.log("before results");
   (async () => {
@@ -100,18 +110,18 @@ app.post('/answer', (req, res) => {
   //console.log(`Le bouton avec l'action ${buttonAction} a été appuyé.`);
   if (SteamGame.checkGame(req.session.jeu.name, gamesSuggestions[buttonAction])) {
     //console.log("GG")
-    totalScore += score;
+    req.session.totalScore += score;
   }
   else {
     //console.log(`the game was : ${req.session.jeu.name}`)
-    totalScore += 0;
+    req.session.totalScore += 0;
   }
   clearInterval(intervalId);
-  if(questionIndex<questionNumber){
-    res.render('results', {boolResult : SteamGame.checkGame(req.session.jeu.name, gamesSuggestions[buttonAction]), goodGame: req.session.jeu.name, score: totalScore, goToSteam: SteamGame.getSteamAdress(req.session.jeu.steamID), question_index: questionIndex , question_number: questionNumber});
+  if(req.session.questionIndex<req.session.questionNumber){
+    res.render('results', {boolResult : SteamGame.checkGame(req.session.jeu.name, gamesSuggestions[buttonAction]), goodGame: req.session.jeu.name, score: req.session.totalScore, goToSteam: SteamGame.getSteamAdress(req.session.jeu.steamID), question_index: req.session.questionIndex , question_number: req.session.questionNumber});
   }
   else{
-    res.render('end',{boolResult : SteamGame.checkGame(req.session.jeu.name, gamesSuggestions[buttonAction]), goodGame: req.session.jeu.name, score: totalScore, goToSteam: SteamGame.getSteamAdress(req.session.jeu.steamID)}); 
+    res.render('end',{boolResult : SteamGame.checkGame(req.session.jeu.name, gamesSuggestions[buttonAction]), goodGame: req.session.jeu.name, score: req.session.totalScore, goToSteam: SteamGame.getSteamAdress(req.session.jeu.steamID)}); 
   }
 });
 
