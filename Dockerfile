@@ -6,8 +6,6 @@ RUN apk add --no-cache python3 py3-pip
 RUN pip3 install --no-cache --upgrade pip setuptools --break-system-packages
 WORKDIR /app
 COPY . /app
-COPY static /app/static
-COPY views /app/views
 RUN npm install axios
 RUN npm install node-schedule
 RUN npm install body-parser
