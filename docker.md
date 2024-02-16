@@ -1,5 +1,5 @@
 #  Docker
-To run this game in a Docker container, you can build the image yourself with the **dockerfile**. To do so, get in this directory, then enter this command:
+To run this game in a Docker container, you can build the image yourself with the **dockerfile**. To do so, enter the following command:
 ```
 sudo docker build -t steam-review-image .
 ```
@@ -12,14 +12,7 @@ sudo docker run -d \
     steam-review-image
     
 ```
-or by using this **docker-compose.yaml** config:
+or by using this **docker-compose** config by typing:
 ```
-version: '3'
-services:
-  steam-review-guessr:
-    container_name: steam-review-game
-    image: steam-review-image
-    ports:
-      - '8080:8080'
-    restart: unless-stopped
+sudo docker-compose up -d
 ```
