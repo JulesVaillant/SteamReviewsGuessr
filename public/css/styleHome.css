@@ -10,11 +10,11 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #121212; 
-    color: #fff; 
-    min-height: 100vh; 
-    position: relative; 
-    padding-bottom: 50px; 
+    background-color: #121212;
+    color: #fff;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 50px;
 }
 
 .container {
@@ -28,6 +28,11 @@ body {
 h1 {
     font-size: 3rem;
     margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 2rem;
+    margin-bottom: auto;
 }
 
 p {
@@ -46,16 +51,16 @@ p {
 }
 
 .btn:hover {
-    background-color: #45a049; 
+    background-color: #45a049;
 }
 
 header {
-    background-color: #333; 
+    background-color: #333;
     padding: 10px 20px;
-    position: fixed; 
-    top: 0; 
+    position: fixed;
+    top: 0;
     left: 0;
-    width: 100%; 
+    width: 100%;
 }
 
 .menu-toggle {
@@ -65,15 +70,15 @@ header {
 }
 
 #menu {
-    display: none; 
-    opacity: 0; 
-    transition: opacity 0.6s ease; 
+    display: none;
+    opacity: 0;
+    transition: opacity 0.6s ease;
 }
 
 #menu ul {
     list-style: none;
     padding: 0;
-    display: flex; 
+    display: flex;
 }
 
 #menu ul li {
@@ -81,14 +86,23 @@ header {
 }
 
 #menu ul li:last-child {
-    margin-right: 0; 
+    margin-right: 0;
 }
 
 #menu ul li a {
     color: #fff;
     text-decoration: none;
     display: flex;
-    align-items: center; 
+    align-items: center;
+}
+
+#menu ul li a:hover
+{
+    color: #ff3636; /* Couleur au survol ou au clic */
+}
+
+#menu ul li a:active{
+    color: #c82c2c;
 }
 
 footer {
@@ -97,7 +111,7 @@ footer {
     padding: 0 0;
     text-align: center;
     position: fixed;
-    bottom: 0; 
+    bottom: 0;
     width: 100%;
 }
 
@@ -107,23 +121,35 @@ button[type="submit"] {
     font-size: 16px;
     border: none;
     border-radius: 5px;
-    background-color: #4CAF50; /* Couleur de fond */
-    color: white; /* Couleur du texte */
+    background-color: #4CAF50;
+    /* Couleur de fond */
+    color: white;
+    /* Couleur du texte */
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 /* Styles lorsque le curseur survole le bouton */
 button[type="submit"]:hover {
-    background-color: #45a049; /* Couleur de fond au survol */
+    background-color: #45a049;
+    /* Couleur de fond au survol */
 }
 
 /* Styles lorsque le bouton est actif (clic) */
 button[type="submit"]:active {
-    background-color: #3e8e41; /* Couleur de fond lors du clic */
+    background-color: #3e8e41;
+    /* Couleur de fond lors du clic */
 }
 
 /* Style optionnel pour le centrage du bouton */
 .form-button-container {
     text-align: center;
+}
+
+.about-container {
+    text-align: center;
+}
+
+code {
+    color: #45a049;
 }

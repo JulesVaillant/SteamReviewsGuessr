@@ -20,6 +20,51 @@
         </nav>
     </header>
 
+    <br><br>
+    <div class="about-container">
+        <h3>SteamReviewsGuessr, c'est quoi ?</h3>
+        <p>SteamReviewsGuessr est un jeu où l'on va afficher quelques reviews Steam à propos d'un jeu sélectionné de
+            manière aléatoire dans la liste de jeux inscrite dans le fichier <i>gameList.json</i> à la racine du code
+            source. Il faut alors déterminer à quel jeu les reviews présentent à l'écran correspondent parmis quelques propositions.
+            La liste est par défaut rempli des 100 jeux Steam les plus populaires, mais il est tout à fait
+            possible de mettre les jeux de votre choix. 
+        </p>
+    </div>
+
+    <br><br>
+    <div class="about-container">
+        <h3>Steam c'est quoi ?</h3>
+        <p>
+            <i>"Steam est une plateforme de distribution de contenu en ligne, de gestion des droits et de communication
+                développée par Valve"</i>, <a href="https://fr.wikipedia.org/wiki/Steam">Wikipedia</a>. <br>
+            Il s'agit du principal marché du jeu vidéo dématerialisé pour PC. Le contenu disponible possède une page qui
+            indique diverses informations tel que la configuration nécessaire, les notes et les avis.
+        </p>
+    </div>
+
+    <br><br>
+    <div class="about-container">
+        <h3>Comment ça marche ?</h3>
+        <p>
+            Steam met à disposition une API qui permet de récupérer des reviews via requête http sous la forme
+            suivante:<br>
+            <code>https://store.steampowered.com/appreviews/730?json=1</code><br>
+            où "730" correspond ici à l'ID Steam du jeu que l'on souhaite consulter.
+        </p>
+    </div>
+
+    <br><br>
+    <div class="about-container">
+        <h3>Licence</h3>
+        <p>Le jeu a été créé sous licence <b>Apache License 2.0</b>. Les spécificités de cette licence sont disponible
+            <a
+                href="https://licence-libre.dev.incubateur.anct.gouv.fr/licence-libre/le-point-sur-les-licences-libres/Apache-2.0">ici</a>.
+            <br>
+            Le code source du programme est disponible <a
+                href="https://github.com/Khopylium/SteamReviewsGuessr">ici</a>.
+        </p>
+    </div>
+
     <footer>
         <p class="copyright">VAILLANT Jules & SIMONE Gregory</p>
     </footer>
