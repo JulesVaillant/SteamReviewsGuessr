@@ -51,7 +51,8 @@ app.get('/', (req, res) =>{
 app.post('/', (req, res)=>{
   req.session.totalScore=0;
   req.session.questionIndex=0;
-  req.session.language=req.body.review_language;
+  //req.session.language=req.body.review_language;
+  req.session.language="english";
   req.session.questionNumber=req.body.questions_number;
   res.render('home');
 });
