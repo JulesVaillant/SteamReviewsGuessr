@@ -135,11 +135,10 @@ app.listen(port, () => {
 app.get('/runPythonScript', (req, res) => {
   exec('python gameListMaker.py', (error, stdout, stderr) => {
       if (error) {
-          console.error(`Erreur lors de l'exécution du script Python : ${error}`);
           res.status(500).send('Une erreur s\'est produite lors de l\'exécution du script Python.');
           return;
       }
       console.log(`Sortie du script Python : ${stdout}`);
-      res.status(200).send('Le script Python a été exécuté avec succès.');
+      res.status(200).send('La liste des jeux a été mise à jour');
   });
 });

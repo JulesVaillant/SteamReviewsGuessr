@@ -24,15 +24,19 @@
         fetch('/runPythonScript')
             .then(response => {
                 if (response.ok) {
-                    console.log('Le script Python a été exécuté avec succès.');
+                    return response.text();
                 } else {
-                    console.error('Erreur lors de l\'exécution du script Python.');
+                    throw new Error('Erreur lors de l\'exécution du script Python.');
                 }
             })
+            .then(message => {
+                alert(message); // ou utilisez une autre méthode pour afficher le message sur la page
+            })
             .catch(error => {
-                console.error('Erreur lors de la requête pour exécuter le script Python :', error);
+                alert('Une erreur s\'est produite lors de l\'exécution du script Python.');
             });
     });
-</script>
+    </script>
+    
     
 </body>
