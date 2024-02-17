@@ -5,17 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page d'accueil</title>
-    <link rel="stylesheet" href="css/styleHome.css">
+    <!--link rel="stylesheet" href="css/styleHome.css"-->
 </head>
 
 <body>
     <form action="/" method="post">
-    <label for="review_language">Langue des reviews:</label>
+    <!--label for="review_language">Langue des reviews:</label>
     <input type="radio" id="french" name="review_language" value="french"><label for="french">Français</label><br>
-    <input type="radio" id="english" name="review_language" value="english" checked><label
-        for="english">English</label><br>
+    <input type="radio" id="english" name="review_language" value="english" checked><label for="english">English</label><br-->
     <label for="questions">Nombre de questions (10-100):</label>
     <input type="number" id="questions" name="questions_number" min="10" max="100" value="10" />
     <button type="submit">Save</button>
 </form>
+<button id="runPythonScript">Mettre à jour la liste de jeux</button>
+
+<script>
+    document.getElementById('runPythonScript').addEventListener('click', function() {
+        fetch('/runPythonScript')
+            .then(response => {
+                if (response.ok) {
+                    console.log('Le script Python a été exécuté avec succès.');
+                } else {
+                    console.error('Erreur lors de l\'exécution du script Python.');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors de la requête pour exécuter le script Python :', error);
+            });
+    });
+</script>
+    
 </body>

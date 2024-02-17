@@ -1,5 +1,5 @@
 //-------------------------requirements
-
+const { exec } = require('child_process');
 const bodyParser = require('body-parser');
 const express = require('express')
 var favicon = require('serve-favicon');
@@ -129,4 +129,17 @@ app.post('/answer', (req, res) => {
 const port = 8000;
 app.listen(port, () => {
   console.log(`Serveur en cours d'exécution sur http://localhost:${port}`);
+});
+
+//---------------------------------Updated gameList
+app.get('/runPythonScript', (req, res) => {
+  exec('python gameListMaker.py', (error, stdout, stderr) => {
+      if (error) {
+          console.error(`Erreur lors de l'exécution du script Python : ${error}`);
+          res.status(500).send('Une erreur s\'est produite lors de l\'exécution du script Python.');
+          return;
+      }
+      console.log(`Sortie du script Python : ${stdout}`);
+      res.status(200).send('Le script Python a été exécuté avec succès.');
+  });
 });

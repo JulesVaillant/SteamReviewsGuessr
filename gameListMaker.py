@@ -22,3 +22,5 @@ with open(filename, "w", encoding="utf-8") as f:
         f.write("\n")
         index_dict+=1
     f.write("}")
+
+print("Game list updated")
