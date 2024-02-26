@@ -9,7 +9,7 @@ Gregory SIMONE: Frontend
 NodeJS, Python3, ExpressJS, HTML, CSS, JavaScript, Docker, Steam API, SteamSpy API
 
 # 🎥Project demo
-https://raw.githubusercontent.com/Khopylium/SteamReviewsGuessr/main/PresentationVideo.webm
+https://raw.githubusercontent.com/JulesVaillant/SteamReviewsGuessr/main/PresentationVideo.webm
 
 # 🪳Known bugs
 The score that goes down by 1 every second during the game on the "/reviews" route is being reset if another client connects to the same page. \
