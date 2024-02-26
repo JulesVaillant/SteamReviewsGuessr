@@ -6,7 +6,7 @@ Jules VAILLANT: Backend \
 Gregory SIMONE: Frontend
 
 # ⚙️Technologies
-NodeJS, Python3, ExpressJS, HTML, CSS, JavaScript, Docker
+NodeJS, Python3, ExpressJS, HTML, CSS, JavaScript, Docker, Steam API, SteamSpy API
 
 # 🎥Project demo
 https://raw.githubusercontent.com/Khopylium/SteamReviewsGuessr/main/PresentationVideo.webm
